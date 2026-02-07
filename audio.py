@@ -494,8 +494,8 @@ def mix_audio_tracks(narration_path: str, background_music: np.ndarray, output_p
         # Gentle limiting to maximize loudness without distortion
         Compressor(threshold_db=-6, ratio=10, attack_ms=1, release_ms=50),
 
-        # Final gain for competitive loudness
-        Gain(gain_db=1.5)
+        # Final gain for competitive loudness (increased for better audibility)
+        Gain(gain_db=3.5)  # Boosted from 1.5 to 3.5 for louder output
     ])
 
     mixed = mastering(mixed, sample_rate)

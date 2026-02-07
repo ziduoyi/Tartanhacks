@@ -191,32 +191,48 @@ def make_storyboard(text: str, vibe: str) -> dict:
     print(f"⚡ Generating new storyboard with Gemini...")
 
     prompt = f"""
-Create a storyboard for an EDUCATIONAL MUSIC VIDEO that explains the webpage content.
+Create a storyboard for a MUSIC VIDEO with SONG LYRICS that summarize the webpage content.
 
-The video will use TEXT-TO-SPEECH NARRATION with background music, so:
-- Each scene's "on_screen_text" will be NARRATED ALOUD (like a documentary voiceover)
-- Write the text as if a narrator is speaking directly to the viewer
-- Make it educational and informative, explaining key concepts from the webpage
-- Use conversational, engaging language (not just captions)
-- Structure it like a mini-lesson with clear progression
+The video will use TEXT-TO-SPEECH VOCALS with background music (like a real song), so:
+- Each scene's "on_screen_text" will be SUNG/NARRATED ALOUD with music
+- Write it like SONG LYRICS - poetic, rhythmic, flowing
+- Use rhyme, metaphor, and poetic language (not dry educational text)
+- Make it catchy and memorable like a real song
+- Structure like a song: Verse 1 → Chorus → Verse 2 → Bridge → Chorus/Outro
 
 Vibe: {vibe}
 
+LYRICS STYLE GUIDE:
+- Use rhythm and flow (like rap, pop, or poetry)
+- Add rhymes where natural (but don't force it)
+- Keep lines concise (5-12 words each)
+- Use emotional, engaging language
+- Make it sound like something you'd actually sing/perform
+
+Example structure:
+Scene 1 (Intro/Hook): Catchy opening line that grabs attention
+Scenes 2-4 (Verse 1): First key points in lyrical form
+Scene 5 (Chorus): Catchy, memorable summary
+Scenes 6-8 (Verse 2): More key points
+Scene 9 (Bridge): Unique perspective or transition
+Scenes 10-12 (Outro/Chorus): Memorable ending
+
 Return valid JSON with:
-- title (string) - An engaging educational title
+- title (string) - A catchy song title (not "explained" or "overview")
 - scenes (array of 8-12 objects), each with:
-  - duration_s (number) - Initial estimate, will be adjusted based on narration length
-  - on_screen_text (string) - NARRATION SCRIPT (1-3 sentences that will be spoken aloud)
-  - image_prompt (string) - Visual that illustrates the narration, consistent {vibe} style
-- audio_plan with tempo_bpm (number) and mood (string matching {vibe})
+  - duration_s (number) - Initial estimate, will be adjusted based on vocal timing
+  - on_screen_text (string) - SONG LYRICS (1-2 lines that will be sung, like actual song lyrics)
+  - image_prompt (string) - Visual that matches the vibe and lyrics, consistent {vibe} style
+- audio_plan with tempo_bpm (number, 90-140) and mood (string matching {vibe})
 
-IMPORTANT:
-- on_screen_text should read naturally when spoken aloud
-- Structure: Intro → Key Points → Conclusion
-- Each scene explains one concept from the webpage
-- Make it flow like an educational video essay
+IMPORTANT - Write it like you're a songwriter:
+- Make it flow like actual song lyrics (rhythm, cadence, emotion)
+- Use poetic devices (metaphor, imagery, rhyme)
+- Keep each line singable (not too wordy)
+- Capture the essence emotionally, not just facts
+- Think: "Would this sound good with music?"
 
-Webpage text to explain:
+Webpage content to transform into song:
 {text}
 """
     model = genai.GenerativeModel('gemini-2.5-flash')
